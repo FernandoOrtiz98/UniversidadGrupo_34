@@ -71,7 +71,7 @@ public class AlumnoData {
     public void eliminarAlumno(int id){
         String query="UPDATE alumno SET estado=0 where idAlumno = ?";
         try {
-            PreparedStatement ps= con.prepareCall(query);
+            PreparedStatement ps= con.prepareStatement(query);
             ps.setInt(1,id);
             int exito=ps.executeUpdate();
             if(exito==1){
