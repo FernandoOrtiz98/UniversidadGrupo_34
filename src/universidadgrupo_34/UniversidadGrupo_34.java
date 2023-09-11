@@ -12,7 +12,9 @@ public class UniversidadGrupo_34 {
     public static void main(String[] args) {
         Alumno alu=new Alumno(12345678,"Gonzales","juan",LocalDate.of(1999, 10, 20),true);
         AlumnoData alum=new AlumnoData();
-        alum.guardarAlumno(alu);
+        //alum.guardarAlumno(alu);
+        Alumno alumnoEncontrado=alum.buscarAlumnoDni(12345678);
+        System.out.println(alumnoEncontrado);
     }
     
 }
