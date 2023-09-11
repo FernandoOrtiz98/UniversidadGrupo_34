@@ -26,7 +26,7 @@ public class AlumnoData {
     }
 
     public void guardarAlumno(Alumno alum){
-        String query="INSERT INTO alumno(dni,apellido,nombre,fechaNacimiento,estado) VALUES (?,?,?,?,?)";
+        String query="INSERT INTO alumno(dni,apellido,nombre,fNacimiento,estado) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
                 ps.setInt(1, alum.getDni());
@@ -44,6 +44,24 @@ public class AlumnoData {
             }
             ps.close();
             JOptionPane.showMessageDialog(null,"Guardado!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error de conexion... "+ex.getMessage());
+        }
+    }
+    public void modificarAlumno(Alumno alum){
+        String query="UPDATE alumno SET dni=?, apellido=?, nombre=?, fNacimiento=?,"
+                + "where idAlumno=?";
+        try {
+            PreparedStatement ps= con.prepareCall(query);
+            ps.setInt(1, alum.getDni());
+                ps.setString(2, alum.getApellido());
+                ps.setString(3, alum.getNombre());
+                ps.setDate(4, Date.valueOf(alum.getfNacimiento()));
+                ps.setBoolean(5, alum.isEstado());
+                int exito=ps.executeUpdate();
+                if(exito==1){
+                    JOptionPane.showMessageDialog(null, "Alumno Modificado");
+                }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Error de conexion... "+ex.getMessage());
         }
