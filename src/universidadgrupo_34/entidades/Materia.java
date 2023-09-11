@@ -7,7 +7,7 @@ package universidadgrupo_34.entidades;
 public class Materia {
     private int idMateria;
    private String nombre;
-   private int año;
+   private int anio;
    private boolean estado;
 
     public Materia() {
@@ -15,14 +15,14 @@ public class Materia {
 
     public Materia(String nombre, int año, boolean estado) {
         this.nombre = nombre;
-        this.año = año;
+        this.anio = año;
         this.estado = estado;
     }
     
     public Materia(int idMateria, String nombre, int año, boolean estado) {
         this.idMateria = idMateria;
         this.nombre = nombre;
-        this.año = año;
+        this.anio = año;
         this.estado = estado;
     }
 
@@ -42,12 +42,12 @@ public class Materia {
         this.nombre = nombre;
     }
 
-    public int getAño() {
-        return año;
+    public int getAnio() {
+        return anio;
     }
 
-    public void setAño(int año) {
-        this.año = año;
+    public void setAnio(int año) {
+        this.anio = año;
     }
 
     public boolean isEstado() {
@@ -60,6 +60,6 @@ public class Materia {
 
     @Override
     public String toString() {
-        return "materia{" + "idMateria=" + idMateria + ", nombre=" + nombre + ", a\u00f1o=" + año + ", estado=" + estado + '}';
+        return "materia{" + "idMateria=" + idMateria + ", nombre=" + nombre + ", a\u00f1o=" + anio + ", estado=" + estado + '}';
     }
 }
