@@ -1,21 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package universidadgrupo_34;
 
-/**
- *
- * @author Fer
- */
+import java.time.LocalDate;
+import universidadgrupo_34.accesoAData.AlumnoData;
+import universidadgrupo_34.entidades.Alumno;
+
+
 public class UniversidadGrupo_34 {
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        Alumno alu=new Alumno(12345678,"Gonzales","juan",LocalDate.of(1999, 10, 20),true);
+        AlumnoData alum=new AlumnoData();
+        alum.guardarAlumno(alu);
     }
     
 }
