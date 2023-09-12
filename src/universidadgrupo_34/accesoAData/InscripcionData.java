@@ -2,15 +2,15 @@
 package universidadgrupo_34.accesoAData;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import universidadgrupo_34.entidades.Alumno;
 import universidadgrupo_34.entidades.Inscripcion;
 
 /**
@@ -21,6 +21,9 @@ public class InscripcionData {
     private Connection con;
     private MateriaData matDat;
     private AlumnoData aluData;
+    
+    //public static TreeSet <Inscripcion> obtenerInscripciones = new TreeSet<>();
+   // public static TreeSet <Inscripcion> obtenerInscripcionesPorAlumno = new TreeSet<>();
 
     public InscripcionData() {
     }
@@ -82,6 +85,17 @@ public class InscripcionData {
             JOptionPane.showMessageDialog(null,"Actualizado!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Error de conexion...");
+        }
+    }
+    public List<Inscripcion> obtenerInscripciones(){
+        List<Inscripcion> inscripciones = new ArrayList();
+        String sql="SELECT idAlumno,idMateria,nota FROM inscripcion i JOIN alumno a ON(i.idAlumno=a.idAlumno)"
+                +" JOIN materia m ON(i.idMateria=m.idMateria) ORDER BY i.nota";
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResulSet rs = ps.executeQuery();
+        } catch (SQLException ex) {
+            Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
