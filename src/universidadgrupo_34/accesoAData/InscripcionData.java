@@ -45,4 +45,26 @@ public class InscripcionData {
             JOptionPane.showMessageDialog(null,"Error de conexion... "+ex.getMessage());
         }
     }
+    public void borrarInscripcionAlumnoMateria(Inscripcion inscripcion){
+        String query="DELETE FROM inscripcion WHERE idMateria = ? AND idAlumno = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+            
+                ps.setInt(1, inscripcion.getAlumno().getIdAlumno());
+                ps.setInt(2, inscripcion.getMateria().getIdMateria());               
+                ps.executeUpdate();
+                
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next()){
+                inscripcion.setIdInscripcion(rs.getInt(1));
+            }else{
+                JOptionPane.showMessageDialog(null,"No se pudo tener el ID...");
+            }
+            ps.close();
+            JOptionPane.showMessageDialog(null,"Guardado!");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error de conexion... "+ex.getMessage());
+        }
+    }
 }
