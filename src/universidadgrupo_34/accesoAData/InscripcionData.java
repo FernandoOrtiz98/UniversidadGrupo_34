@@ -91,11 +91,20 @@ public class InscripcionData {
         List<Inscripcion> inscripciones = new ArrayList();
         String sql="SELECT idAlumno,idMateria,nota FROM inscripcion i JOIN alumno a ON(i.idAlumno=a.idAlumno)"
                 +" JOIN materia m ON(i.idMateria=m.idMateria) ORDER BY i.nota";
+        Inscripcion insc=null;
         try {
             PreparedStatement ps= con.prepareStatement(sql);
-            ResulSet rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                insc.getAlumno().setIdAlumno(rs.getInt("idAlumno"));
+                insc.getMateria().setIdMateria(rs.getInt("idMateria"));
+                insc.setNota(rs.getInt("nota"));
+                inscripciones.add(insc);
+                
+            }
         } catch (SQLException ex) {
-            Logger.getLogger(InscripcionData.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Error de conexion...");
         }
+        return inscripciones;
     }
 }
