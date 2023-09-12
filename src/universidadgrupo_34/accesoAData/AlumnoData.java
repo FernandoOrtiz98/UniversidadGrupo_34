@@ -54,7 +54,7 @@ public class AlumnoData {
         String query="UPDATE alumno SET dni=?, apellido=?, nombre=?, fNacimiento=?,"
                 + "where idAlumno=?";
         try {
-            PreparedStatement ps= con.prepareCall(query);
+            PreparedStatement ps= con.prepareStatement(query);
             ps.setInt(1, alum.getDni());
                 ps.setString(2, alum.getApellido());
                 ps.setString(3, alum.getNombre());
