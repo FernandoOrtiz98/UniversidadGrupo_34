@@ -103,7 +103,7 @@ public class InscripcionData {
                 
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Error de conexion...");
+            JOptionPane.showMessageDialog(null,"Error de conexion..."+ex.getMessage());
         }
         return inscripciones;
     }
