@@ -185,15 +185,15 @@ public class InscripcionData {
             PreparedStatement ps= con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                if(idMat==alum.getMateria().getIdMateria()){
-                    if(alum.getMateria().isEstado()==true){
                 alum.getAlumno().setIdAlumno(rs.getInt("idAlumno"));
                 alum.getAlumno().setDni(rs.getInt("dni"));
                 alum.getAlumno().setApellido(rs.getString("apellido"));
                 alum.getAlumno().setNombre(rs.getString("nombre"));
                 alum.getAlumno().setfNacimiento(rs.getDate("fNacimiento").toLocalDate());
                 alum.getAlumno().setEstado(rs.getBoolean("estado"));
-                AlumList.add(alum.getAlumno());
+                if(idMat==alum.getMateria().getIdMateria()){
+                    if(alum.getMateria().isEstado()==true){            
+                        AlumList.add(alum.getAlumno());
                     }
                 }
             }
