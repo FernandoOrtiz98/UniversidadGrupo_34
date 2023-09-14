@@ -118,10 +118,11 @@ public class InscripcionData {
             PreparedStatement ps= con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                if(id==insc.getAlumno().getIdAlumno()){
                 insc.getAlumno().setIdAlumno(rs.getInt("idAlumno"));
                 insc.getMateria().setIdMateria(rs.getInt("idMateria"));
                 insc.setNota(rs.getInt("nota"));
+                if(id==insc.getAlumno().getIdAlumno()){
+                
                 inscripciones.add(insc);
                 }
             }
@@ -139,11 +140,12 @@ public class InscripcionData {
             PreparedStatement ps= con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                if(id==insc.getAlumno().getIdAlumno()){
-                    if(insc.getMateria().isEstado()==true){
                 insc.getAlumno().setIdAlumno(rs.getInt("idAlumno"));
                 insc.getMateria().setIdMateria(rs.getInt("idMateria"));
                 insc.setNota(rs.getInt("nota"));
+                if(id==insc.getAlumno().getIdAlumno()){
+                    if(insc.getMateria().isEstado()==true){
+                
                 inscripciones.add(insc);
                     }
                 }
@@ -162,11 +164,12 @@ public class InscripcionData {
             PreparedStatement ps= con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                if(id==insc.getAlumno().getIdAlumno()){
-                    if(insc.getMateria().isEstado()==false){
                 insc.getAlumno().setIdAlumno(rs.getInt("idAlumno"));
                 insc.getMateria().setIdMateria(rs.getInt("idMateria"));
                 insc.setNota(rs.getInt("nota"));
+                if(id==insc.getAlumno().getIdAlumno()){
+                    if(insc.getMateria().isEstado()==false){
+                
                 inscripciones.add(insc);
                     }
                 }
