@@ -2,6 +2,7 @@
 package universidadgrupo_34.accesoAData;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import universidadgrupo_34.entidades.Alumno;
 import universidadgrupo_34.entidades.Inscripcion;
 
 /**
@@ -106,5 +108,98 @@ public class InscripcionData {
             JOptionPane.showMessageDialog(null,"Error de conexion..."+ex.getMessage());
         }
         return inscripciones;
+    }
+     public List<Inscripcion> obtenerInscripcionesPorAlumno(int id){
+        List<Inscripcion> inscripciones = new ArrayList();
+        String sql="SELECT idAlumno,idMateria,nota FROM inscripcion i JOIN alumno a ON(i.idAlumno=a.idAlumno)"
+                +" JOIN materia m ON(i.idMateria=m.idMateria) ORDER BY i.nota";
+        Inscripcion insc=null;
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                if(id==insc.getAlumno().getIdAlumno()){
+                insc.getAlumno().setIdAlumno(rs.getInt("idAlumno"));
+                insc.getMateria().setIdMateria(rs.getInt("idMateria"));
+                insc.setNota(rs.getInt("nota"));
+                inscripciones.add(insc);
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error de conexion..."+ex.getMessage());
+        }
+        return inscripciones;
+    }
+     public List<Inscripcion> obtenerMateriasCursadas(int id){
+        List<Inscripcion> inscripciones = new ArrayList();
+        String sql="SELECT idAlumno,idMateria,nota FROM inscripcion i JOIN alumno a ON(i.idAlumno=a.idAlumno)"
+                +" JOIN materia m ON(i.idMateria=m.idMateria) ORDER BY i.nota";
+        Inscripcion insc=null;
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                if(id==insc.getAlumno().getIdAlumno()){
+                    if(insc.getMateria().isEstado()==true){
+                insc.getAlumno().setIdAlumno(rs.getInt("idAlumno"));
+                insc.getMateria().setIdMateria(rs.getInt("idMateria"));
+                insc.setNota(rs.getInt("nota"));
+                inscripciones.add(insc);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error de conexion..."+ex.getMessage());
+        }
+        return inscripciones;
+    }
+      public List<Inscripcion> obtenerMateriasNoCursadas(int id){
+        List<Inscripcion> inscripciones = new ArrayList();
+        String sql="SELECT idAlumno,idMateria,nota FROM inscripcion i JOIN alumno a ON(i.idAlumno=a.idAlumno)"
+                +" JOIN materia m ON(i.idMateria=m.idMateria) ORDER BY i.nota";
+        Inscripcion insc=null;
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                if(id==insc.getAlumno().getIdAlumno()){
+                    if(insc.getMateria().isEstado()==false){
+                insc.getAlumno().setIdAlumno(rs.getInt("idAlumno"));
+                insc.getMateria().setIdMateria(rs.getInt("idMateria"));
+                insc.setNota(rs.getInt("nota"));
+                inscripciones.add(insc);
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error de conexion..."+ex.getMessage());
+        }
+        return inscripciones;
+    }
+       public List<Alumno> obtenerAlumnoPorMateria(int idMat){
+        List<Alumno> AlumList = new ArrayList();
+        String sql="SELECT idAlumno,idMateria,nota FROM inscripcion i JOIN alumno a ON(i.idAlumno=a.idAlumno)"
+                +" JOIN materia m ON(i.idMateria=m.idMateria) ORDER BY i.nota";
+        Inscripcion alum=null;
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                if(idMat==alum.getMateria().getIdMateria()){
+                    if(alum.getMateria().isEstado()==true){
+                alum.getAlumno().setIdAlumno(rs.getInt("idAlumno"));
+                alum.getAlumno().setDni(rs.getInt("dni"));
+                alum.getAlumno().setApellido(rs.getString("apellido"));
+                alum.getAlumno().setNombre(rs.getString("nombre"));
+                alum.getAlumno().setfNacimiento(rs.getDate("fNacimiento").toLocalDate());
+                alum.getAlumno().setEstado(rs.getBoolean("estado"));
+                AlumList.add(alum.getAlumno());
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error de conexion..."+ex.getMessage());
+        }
+        return AlumList;
     }
 }
