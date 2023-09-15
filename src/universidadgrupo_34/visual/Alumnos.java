@@ -7,6 +7,7 @@ package universidadgrupo_34.visual;
 import java.text.DateFormat;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import javax.swing.JOptionPane;
@@ -89,8 +90,18 @@ public class Alumnos extends javax.swing.JInternalFrame {
         });
 
         jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -100,6 +111,11 @@ public class Alumnos extends javax.swing.JInternalFrame {
         });
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -221,12 +237,39 @@ public class Alumnos extends javax.swing.JInternalFrame {
         alu.setDni(Integer.parseInt(jtDocumento.getText()));
         alu.setApellido(jtApellido.getText());
         alu.setNombre(jtNombre.getText());
-        alu.setEstado(jrEstado.getHideActionText());
-//        SimpleDateFormat fechaF = new SimpleDateFormat();
-//        SimpleDateFormat("dd-MM-yyyy").format(jdCalendario.getDate());
-        alu.setfNacimiento(LocalDate.parse(jdCalendario.getDateFormatString(), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        alu.setEstado(jrEstado.isSelected());
+        alu.setfNacimiento(jdCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         alum.guardarAlumno(alu);
     }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        jtDocumento.setText("");
+        jtApellido.setText("");
+        jtNombre.setText("");
+        jrEstado.setSelected(false);
+        jdCalendario.setDate(null);
+        alu=null;
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        try {
+            if (jtDocumento==null) {
+                JOptionPane.showMessageDialog(this, "No selecciono ningun alumno");
+            }else if(jtDocumento==alum.buscarAlumnoDni(Integer.parseInt(jtDocumento)))
+                    
+            else{
+              alum.eliminarAlumno(alu.getIdAlumno());      
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"No se pudo Eliminar el alumno");
+        }
+        
+        
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
