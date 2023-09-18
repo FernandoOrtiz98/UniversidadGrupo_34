@@ -256,19 +256,22 @@ public class Alumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+       Alumno alumno1=alum.buscarAlumnoDni(Integer.parseInt(jtDocumento.getText()));
         try {
-            if (jtDocumento==null) {
+            if (jtDocumento.getText()==null) {
                 JOptionPane.showMessageDialog(this, "No selecciono ningun alumno");
-            }else if(jtDocumento==alum.buscarAlumnoDni(Integer.parseInt(jtDocumento)))
-                    
-            else{
-              alum.eliminarAlumno(alu.getIdAlumno());      
-            }
-        } catch (Exception e) {
+            }else if(Integer.parseInt(jtDocumento.getText())== alumno1.getDni()){          
+                alum.eliminarAlumno(alumno1.getIdAlumno());
+                JOptionPane.showMessageDialog(this, "Eliminacion exitosa!");
+            }else{
+                JOptionPane.showMessageDialog(this, "Dni no registrado!...");
+                    } 
+            
+        }catch (Exception e) {
             JOptionPane.showMessageDialog(this,"No se pudo Eliminar el alumno");
         }
         
-        
+  
     }//GEN-LAST:event_jbEliminarActionPerformed
 
 
