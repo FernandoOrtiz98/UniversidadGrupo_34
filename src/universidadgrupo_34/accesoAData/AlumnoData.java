@@ -117,7 +117,7 @@ public class AlumnoData {
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setfNacimiento(rs.getDate("fNacimiento").toLocalDate());
-                alumno.setEstado(rs.getBoolean("estado"));
+                alumno.setEstado(true);
             
             }else{
                 JOptionPane.showMessageDialog(null, "no existe el alumno");
