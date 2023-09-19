@@ -18,7 +18,7 @@ import universidadgrupo_34.entidades.Alumno;
 
 /**
  *
- * @author Jose
+ * @author Grupo 34
  */
 public class AlumnoData {
     private Connection con=null;
