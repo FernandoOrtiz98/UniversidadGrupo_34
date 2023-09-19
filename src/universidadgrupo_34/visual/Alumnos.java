@@ -154,10 +154,8 @@ public class Alumnos extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jdCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)))))
-                .addGap(2, 2, 2)
+                            .addComponent(jtDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jbBuscar)
@@ -256,12 +254,11 @@ public class Alumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-       Alumno alumno1=alum.buscarAlumnoDni(Integer.parseInt(jtDocumento.getText()));
         try {
             if (jtDocumento.getText()==null) {
                 JOptionPane.showMessageDialog(this, "No selecciono ningun alumno");
-            }else if(Integer.parseInt(jtDocumento.getText())== alumno1.getDni()){          
-                alum.eliminarAlumno(alumno1.getIdAlumno());
+            }else if(Integer.parseInt(jtDocumento.getText())== alu.getDni()){          
+                alum.eliminarAlumno(alu.getIdAlumno());
                 JOptionPane.showMessageDialog(this, "Eliminacion exitosa!");
             }else{
                 JOptionPane.showMessageDialog(this, "Dni no registrado!...");
@@ -271,7 +268,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this,"No se pudo Eliminar el alumno");
         }
         
-  
+        
     }//GEN-LAST:event_jbEliminarActionPerformed
 
 
