@@ -5,6 +5,7 @@
  */
 package universidadgrupo_34.visual;
 
+import javax.swing.JOptionPane;
 import universidadgrupo_34.accesoAData.MateriaData;
 import universidadgrupo_34.entidades.Materia;
 
@@ -153,6 +154,11 @@ public class Materias extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        try {
+            mate=matData.buscarMateria(Integer.parseInt(jtIDmateria.getText()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Codigo incorrecto");
+        }
         
     }//GEN-LAST:event_jbBuscarActionPerformed
 
