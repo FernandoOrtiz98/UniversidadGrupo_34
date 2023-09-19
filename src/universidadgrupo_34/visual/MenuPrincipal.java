@@ -141,7 +141,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jmFMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmFMateriaActionPerformed
         Escritorio.removeAll();
         Escritorio.repaint();
-        Materia materia=new Materia();
+        Materias materia=new Materias();
         Escritorio.add(materia);
         Escritorio.moveToFront(materia);
         materia.setVisible(true);
