@@ -160,6 +160,11 @@ public class Materias extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Codigo incorrecto");
         }
         
+       jtIDmateria.setText(Integer.toString(mate.getIdMateria()));
+       jtNombre.setText(mate.getNombre());
+       jtAnio.setText(Integer.toString(mate.getAnio()));
+       jrEstado.setSelected(mate.isEstado());
+        
     }//GEN-LAST:event_jbBuscarActionPerformed
 
 
