@@ -74,10 +74,20 @@ public class Materias extends javax.swing.JInternalFrame {
         });
 
         jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbEliminar.setText("Eliminar");
 
         jtGuardar.setText("Guardar");
+        jtGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtGuardarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
 
@@ -166,6 +176,17 @@ public class Materias extends javax.swing.JInternalFrame {
        jrEstado.setSelected(mate.isEstado());
         
     }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        jtIDmateria.setText("");
+        jtNombre.setText("");
+        jtAnio.setText("");
+        jrEstado.setSelected(false);
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jtGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtGuardarActionPerformed
+         //dsadas
+    }//GEN-LAST:event_jtGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
