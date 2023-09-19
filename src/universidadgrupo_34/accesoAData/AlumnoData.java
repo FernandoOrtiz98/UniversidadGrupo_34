@@ -14,7 +14,7 @@ import universidadgrupo_34.entidades.Alumno;
 
 /**
  *
- * @author Jose
+ * @author Grupo 34
  */
 public class AlumnoData {
     private Connection con=null;
@@ -117,7 +117,7 @@ public class AlumnoData {
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setfNacimiento(rs.getDate("fNacimiento").toLocalDate());
-                alumno.setEstado(rs.getBoolean("estado"));
+                alumno.setEstado(true);
             
             }else{
                 JOptionPane.showMessageDialog(null, "no existe el alumno");
