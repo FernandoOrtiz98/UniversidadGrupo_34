@@ -81,6 +81,11 @@ public class Materias extends javax.swing.JInternalFrame {
         });
 
         jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
 
         jtGuardar.setText("Guardar");
         jtGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -90,6 +95,11 @@ public class Materias extends javax.swing.JInternalFrame {
         });
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,8 +195,31 @@ public class Materias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jtGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtGuardarActionPerformed
-         //dsadas
+        mate.setNombre(jtNombre.getText());
+        mate.setAnio(Integer.parseInt(jtAnio.getText()));
+        mate.setEstado(jrEstado.isSelected());
+        matData.guardarMateria(mate);
     }//GEN-LAST:event_jtGuardarActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        try {
+            if (jtIDmateria.getText()==null) {
+                JOptionPane.showMessageDialog(this, "No selecciono ninguna materia");
+            }else if(Integer.parseInt(jtIDmateria.getText())== mate.getIdMateria()){          
+                matData.eliminarMateria(mate.getIdMateria());
+                JOptionPane.showMessageDialog(this, "Eliminacion exitosa!");
+            }else{
+                JOptionPane.showMessageDialog(this, "Dni no registrado!...");
+                    } 
+            
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"No se pudo Eliminar el alumno");
+        }
+    }//GEN-LAST:event_jbEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
