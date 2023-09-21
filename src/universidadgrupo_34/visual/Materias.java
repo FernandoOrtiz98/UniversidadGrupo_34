@@ -18,7 +18,7 @@ public class Materias extends javax.swing.JInternalFrame {
     MateriaData matData= new MateriaData();
     
     /**
-     * Creates new form Alumnos
+     * 
      */
     public Materias() {
         initComponents();
