@@ -210,16 +210,16 @@ public class Alumnos extends javax.swing.JInternalFrame {
         try {
             
             alu=alum.buscarAlumnoDni(Integer.parseInt(jtDocumento.getText()));
-            
+            jtApellido.setText(alu.getApellido());
+            jtNombre.setText(alu.getNombre());
+            jrEstado.setSelected(alu.isEstado());
+            jdCalendario.setDate(Date.valueOf(alu.getfNacimiento()));
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Dni incorrecto");
         }
         
         
-        jtApellido.setText(alu.getApellido());
-        jtNombre.setText(alu.getNombre());
-        jrEstado.setSelected(alu.isEstado());
-        jdCalendario.setDate(Date.valueOf(alu.getfNacimiento()));
+        
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jrEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrEstadoActionPerformed
