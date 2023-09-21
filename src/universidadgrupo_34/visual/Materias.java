@@ -176,14 +176,13 @@ public class Materias extends javax.swing.JInternalFrame {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         try {
             mate=matData.buscarMateria(Integer.parseInt(jtIDmateria.getText()));
+            jtIDmateria.setText(Integer.toString(mate.getIdMateria()));
+            jtNombre.setText(mate.getNombre());
+            jtAnio.setText(Integer.toString(mate.getAnio()));
+            jrEstado.setSelected(mate.isEstado());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Codigo incorrecto");
         }
-        
-       jtIDmateria.setText(Integer.toString(mate.getIdMateria()));
-       jtNombre.setText(mate.getNombre());
-       jtAnio.setText(Integer.toString(mate.getAnio()));
-       jrEstado.setSelected(mate.isEstado());
         
     }//GEN-LAST:event_jbBuscarActionPerformed
 
@@ -213,11 +212,10 @@ public class Materias extends javax.swing.JInternalFrame {
                 matData.eliminarMateria(mate.getIdMateria());
                 JOptionPane.showMessageDialog(this, "Eliminacion exitosa!");
             }else{
-                JOptionPane.showMessageDialog(this, "Dni no registrado!...");
+                JOptionPane.showMessageDialog(this, "El id ingresado no esta en la base de datos");
                     } 
-            
         }catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"No se pudo Eliminar el alumno");
+            JOptionPane.showMessageDialog(this,"No se pudo Eliminar la materia");
         }
     }//GEN-LAST:event_jbEliminarActionPerformed
 
