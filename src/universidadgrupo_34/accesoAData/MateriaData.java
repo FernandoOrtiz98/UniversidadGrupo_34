@@ -6,19 +6,17 @@
 package universidadgrupo_34.accesoAData;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Statement;
-import universidadgrupo_34.entidades.Alumno;
 import universidadgrupo_34.entidades.Materia;
 
 /**
  *
- * @author Grupo 34
+ * @author Grupo_34
  */
 public class MateriaData {
     private Connection con=null;
