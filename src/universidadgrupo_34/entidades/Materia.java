@@ -5,7 +5,7 @@ package universidadgrupo_34.entidades;
  * @author Fer
  */
 public class Materia {
-    private int idMateria;
+   private int idMateria;
    private String nombre;
    private int anio;
    private boolean estado;
