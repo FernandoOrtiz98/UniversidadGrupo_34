@@ -12,7 +12,7 @@ import universidadgrupo_34.entidades.Alumno;
 
 /**
  *
- * @author Fer
+ * @author grupo_34
  */
 public class Alumnos extends javax.swing.JInternalFrame {
     AlumnoData alum= new AlumnoData();
