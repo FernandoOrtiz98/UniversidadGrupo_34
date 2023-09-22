@@ -19,8 +19,8 @@ public class UniversidadGrupo_34 {
 //        System.out.println(alumnoEncontrado);
         Materia mat = new Materia();
         MateriaData matdat = new MateriaData();
-        mat=matdat.buscarMateria(1);
-        System.out.println("materia: "+mat.getIdMateria());
+        mat=matdat.buscarMateria(3);
+        System.out.println("materia: "+mat.getNombre());
     }
     //
     
