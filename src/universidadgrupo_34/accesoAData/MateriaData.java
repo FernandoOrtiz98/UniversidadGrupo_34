@@ -6,17 +6,19 @@
 package universidadgrupo_34.accesoAData;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import org.mariadb.jdbc.Statement;
+import universidadgrupo_34.entidades.Alumno;
 import universidadgrupo_34.entidades.Materia;
 
 /**
  *
- * @author Grupo_34
+ * @author Jose
  */
 public class MateriaData {
     private Connection con=null;
@@ -65,8 +67,7 @@ public class MateriaData {
         }
     }
     public void eliminarMateria(int id){
-        String query="UPDATE materia SET estado=0"
-                + "where idMateria= ?";
+        String query="UPDATE materia SET estado=0 where idMateria=?";
         try {
             PreparedStatement ps= con.prepareStatement(query);
                 ps.setInt(1,id);
@@ -80,7 +81,7 @@ public class MateriaData {
         }        
     }
     public  Materia buscarMateria(int id){
-        String sql="SELECT nombre,anio,estado FROM materia WHERE idMateria =? AND estado = 1";
+        String sql="SELECT idMateria,nombre,anio FROM materia WHERE idMateria =? AND estado = 1";
         Materia materia=null;
         try {
             PreparedStatement ps= con.prepareStatement(sql);
@@ -88,7 +89,7 @@ public class MateriaData {
             ResultSet rs=ps.executeQuery();
             if(rs.next()){
                 materia= new Materia();
-                materia.setIdMateria(id);
+                materia.setIdMateria(rs.getInt("idMateria"));
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnio(rs.getInt("anio"));
                 materia.setEstado(true);
