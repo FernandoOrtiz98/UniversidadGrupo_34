@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import universidadgrupo_34.accesoAData.AlumnoData;
+import universidadgrupo_34.accesoAData.InscripcionData;
 import universidadgrupo_34.entidades.Alumno;
+import universidadgrupo_34.entidades.Inscripcion;
+import universidadgrupo_34.entidades.Materia;
 
 /**
  *
@@ -19,6 +22,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
      private DefaultTableModel modelo = new DefaultTableModel();
      AlumnoData al = new AlumnoData();
      ArrayList<Alumno> alumnos = (ArrayList<Alumno>) al.listarAlumnos();
+     InscripcionData insc = new InscripcionData();
     /**
      * Creates new form Alumnos
      */
@@ -54,8 +58,8 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jcbAlumnos = new javax.swing.JComboBox<>();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        jrInscriptas = new javax.swing.JRadioButton();
+        jrNoInscriptas = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtMaterias = new javax.swing.JTable();
 
@@ -86,9 +90,19 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
 
         jButton4.setText("Salir");
 
-        jRadioButton2.setText("Materias inscriptas");
+        jrInscriptas.setText("Materias inscriptas");
 
-        jRadioButton3.setText("Materias no inscriptas");
+        jrNoInscriptas.setText("Materias no inscriptas");
+        jrNoInscriptas.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jrNoInscriptasStateChanged(evt);
+            }
+        });
+        jrNoInscriptas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrNoInscriptasActionPerformed(evt);
+            }
+        });
 
         jtMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -126,9 +140,9 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(63, 63, 63)
-                .addComponent(jRadioButton3)
+                .addComponent(jrNoInscriptas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton2)
+                .addComponent(jrInscriptas)
                 .addGap(96, 96, 96))
             .addGroup(layout.createSequentialGroup()
                 .addGap(53, 53, 53)
@@ -151,8 +165,8 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
                 .addComponent(jLabel3)
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3))
+                    .addComponent(jrInscriptas)
+                    .addComponent(jrNoInscriptas))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
@@ -165,6 +179,19 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jrNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrNoInscriptasActionPerformed
+
+    }//GEN-LAST:event_jrNoInscriptasActionPerformed
+
+    private void jrNoInscriptasStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jrNoInscriptasStateChanged
+        jrInscriptas.setSelected(false);
+        borrarFilas();
+        Alumno alumnoSelect=(Alumno) jcbAlumnos.getSelectedItem();
+        for(InscripcionData mat:insc.obtenerMateriasNoCursadas(alumnoSelect.getIdAlumno()).get(Inscripciones)){
+           modelo.addRow(mat);
+         }
+    }//GEN-LAST:event_jrNoInscriptasStateChanged
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -181,13 +208,13 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JComboBox<Alumno> jcbAlumnos;
+    private javax.swing.JRadioButton jrInscriptas;
+    private javax.swing.JRadioButton jrNoInscriptas;
     private javax.swing.JTable jtMaterias;
     // End of variables declaration//GEN-END:variables
 private void cargarComboBox() {
@@ -210,4 +237,11 @@ private void cargarComboBox() {
 
         jtMaterias.setModel(modelo);
     }
+    private void borrarFilas(){
+        int f = jtMaterias.getRowCount()-1;
+        for(;f>=0;f--){
+            modelo.removeRow(f);
+        }
+    }
+    
 }
