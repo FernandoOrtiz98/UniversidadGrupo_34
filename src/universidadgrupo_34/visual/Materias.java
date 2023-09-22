@@ -189,6 +189,7 @@ public class Materias extends javax.swing.JInternalFrame {
         jtNombre.setText("");
         jtAnio.setText("");
         jrEstado.setSelected(false);
+        mate=null;
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jtGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtGuardarActionPerformed
