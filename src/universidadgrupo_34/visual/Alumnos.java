@@ -4,12 +4,8 @@
  * and open the template in the editor.
  */
 package universidadgrupo_34.visual;
-import java.text.DateFormat;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import javax.swing.JOptionPane;
 import universidadgrupo_34.accesoAData.AlumnoData;
 import universidadgrupo_34.entidades.Alumno;
