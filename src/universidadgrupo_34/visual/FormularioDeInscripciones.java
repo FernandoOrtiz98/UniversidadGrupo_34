@@ -5,17 +5,27 @@
  */
 package universidadgrupo_34.visual;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.table.DefaultTableModel;
+import universidadgrupo_34.accesoAData.AlumnoData;
+import universidadgrupo_34.entidades.Alumno;
+
 /**
  *
  * @author Fer
  */
 public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
-
+     private DefaultTableModel modelo = new DefaultTableModel();
+     AlumnoData al = new AlumnoData();
+     ArrayList<Alumno> alumnos = (ArrayList<Alumno>) al.listarAlumnos();
     /**
      * Creates new form Alumnos
      */
     public FormularioDeInscripciones() {
         initComponents();
+        armarCabecera();
+        cargarComboBox();
     }
 
     /**
@@ -43,11 +53,11 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcbAlumnos = new javax.swing.JComboBox<>();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtMaterias = new javax.swing.JTable();
 
         jLabel6.setText("Fecha de Nacimiento:");
 
@@ -76,13 +86,11 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
 
         jButton4.setText("Salir");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jRadioButton2.setText("Materias inscriptas");
 
         jRadioButton3.setText("Materias no inscriptas");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtMaterias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -93,7 +101,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtMaterias);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,7 +122,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(37, 37, 37)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jcbAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(63, 63, 63)
@@ -138,7 +146,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jLabel3)
                 .addGap(33, 33, 33)
@@ -157,7 +165,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -165,7 +173,6 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -177,9 +184,30 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JComboBox<Alumno> jcbAlumnos;
+    private javax.swing.JTable jtMaterias;
     // End of variables declaration//GEN-END:variables
+private void cargarComboBox() {
+       
+        ArrayList<Alumno> alumnos = (ArrayList<Alumno>) al.listarAlumnos();
+
+        Alumno A = new Alumno();
+        for (Iterator<Alumno> it = alumnos.iterator(); it.hasNext();) {
+            A = it.next();
+            jcbAlumnos.addItem(A);
+        }
+
+    }
+
+    private void armarCabecera() {
+
+        modelo.addColumn("ID");
+        modelo.addColumn("Materia");
+        modelo.addColumn("Año");
+
+        jtMaterias.setModel(modelo);
+    }
 }
