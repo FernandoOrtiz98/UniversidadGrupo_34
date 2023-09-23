@@ -46,26 +46,24 @@ public class InscripcionData {
         }
     }
 
-    public void borrarInscripcionAlumnoMateria(Inscripcion inscripcion) {
+    public void borrarInscripcionAlumnoMateria(int idAlumno, int idMateria) {
         String query = "DELETE FROM inscripcion WHERE idMateria = ? AND idAlumno = ?";
 
         try {
-            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(query);
 
-            ps.setInt(1, inscripcion.getAlumno().getIdAlumno());
-            ps.setInt(2, inscripcion.getMateria().getIdMateria());
-            ps.executeUpdate();
+            ps.setInt(1, idAlumno);
+            ps.setInt(2, idMateria);
+            int filas=ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                inscripcion.setIdInscripcion(rs.getInt(1));
-            } else {
-                JOptionPane.showMessageDialog(null, "No se pudo tener el ID...");
+            if (filas>0) {
+                JOptionPane.showMessageDialog(null, "inscripcion borrada");
             }
             ps.close();
-            JOptionPane.showMessageDialog(null, "Guardado!");
+            
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error de conexion... " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de inscripciones ");
         }
     }
 
