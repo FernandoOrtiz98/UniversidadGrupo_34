@@ -30,6 +30,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
         initComponents();
         armarCabecera();
         cargarComboBox();
+        System.out.println("verificar:"+jcbAlumnos.getItemAt(WIDTH).getIdAlumno());
     }
 
     /**
@@ -181,16 +182,16 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrNoInscriptasActionPerformed
-
+        ///jrInscriptas.setSelected(false);
+        borrarFilas();
+        for(Inscripcion inc:insc.obtenerMateriasNoCursadas(jcbAlumnos.getItemAt(WIDTH).getIdAlumno())){
+           modelo.addRow(new Object[]{inc.getIdInscripcion(),inc.getMateria().getNombre(),inc.getMateria().getAnio()});
+         }
+        jtMaterias.setModel(modelo);
     }//GEN-LAST:event_jrNoInscriptasActionPerformed
 
     private void jrNoInscriptasStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jrNoInscriptasStateChanged
-        jrInscriptas.setSelected(false);
-        borrarFilas();
-        Alumno alumnoSelect=(Alumno) jcbAlumnos.getSelectedItem();
-        for(InscripcionData mat:insc.obtenerMateriasNoCursadas(alumnoSelect.getIdAlumno()).get(Inscripciones)){
-           modelo.addRow(mat);
-         }
+        
     }//GEN-LAST:event_jrNoInscriptasStateChanged
     
 
