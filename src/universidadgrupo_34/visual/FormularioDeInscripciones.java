@@ -182,12 +182,11 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrNoInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrNoInscriptasActionPerformed
-        ///jrInscriptas.setSelected(false);
+        jrInscriptas.setSelected(false);
         borrarFilas();
-        for(Inscripcion inc:insc.obtenerMateriasNoCursadas(jcbAlumnos.getItemAt(WIDTH).getIdAlumno())){
+        for(Inscripcion inc:insc.obtenerMateriasNoCursadas(1)){
            modelo.addRow(new Object[]{inc.getIdInscripcion(),inc.getMateria().getNombre(),inc.getMateria().getAnio()});
          }
-        jtMaterias.setModel(modelo);
     }//GEN-LAST:event_jrNoInscriptasActionPerformed
 
     private void jrNoInscriptasStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jrNoInscriptasStateChanged
