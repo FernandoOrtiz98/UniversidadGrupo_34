@@ -231,6 +231,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
         if(filaSeleccionada!=-1){
             Alumno a=(Alumno)jcbAlumnos.getSelectedItem();
             int idMateria=(Integer)modelo.getValueAt(filaSeleccionada, 0);
+            System.out.println("select "+a.getIdAlumno()+" "+idMateria);
             inscData.borrarInscripcionAlumnoMateria(a.getIdAlumno(),idMateria);
             borrarFilas();
         }
