@@ -174,8 +174,8 @@ public class InscripcionData {
     }
        public List<Alumno> obtenerAlumnoPorMateria(int idMateria){
         ArrayList<Alumno> AlumList = new ArrayList();
-        String sql="SELECT a.idAlumno,dni,apellido,nombre,fNacimiento,estado"
-                + "FROM inscripcion i,alumno a WHERE i.idAlumno = a.idAlumno AND idMateria = ? AND a.estado = 1";
+        String sql=" SELECT a.idAlumno,dni,apellido,nombre,fNacimiento,estado "
+                + " FROM inscripcion i,alumno a WHERE i.idAlumno = a.idAlumno AND idMateria = ? AND a.estado = 1";
         try {
             PreparedStatement ps= con.prepareStatement(sql);
             ps.setInt(1, idMateria);
