@@ -18,9 +18,8 @@ public class InscripcionData {
     private MateriaData matDat;
     private AlumnoData aluData;
 
-    //public static TreeSet <Inscripcion> obtenerInscripciones = new TreeSet<>();
-    // public static TreeSet <Inscripcion> obtenerInscripcionesPorAlumno = new TreeSet<>();
     public InscripcionData() {
+        this.con = Conexion.getConexion();
     }
 
     public void guardarInscripcion(Inscripcion inscripcion) {
@@ -145,11 +144,11 @@ public class InscripcionData {
                 materia.setNombre(rs.getString("nombre"));
                 materia.setAnio(rs.getInt("anio"));
                 materias.add(materia);
-                
                 }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Error al acceder a la tabla inscripcion");
+            ex.printStackTrace();
         }
         return materias;
         
@@ -173,6 +172,7 @@ public class InscripcionData {
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Error al acceder a la tabla inscripcion");
+            ex.printStackTrace();
         }
         return materias;
         
