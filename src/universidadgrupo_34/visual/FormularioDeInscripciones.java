@@ -52,7 +52,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jbInscribir = new javax.swing.JButton();
         jbAnularInscripcion = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
         jcbAlumnos = new javax.swing.JComboBox<>();
         jrInscriptas = new javax.swing.JRadioButton();
         jrNoInscriptas = new javax.swing.JRadioButton();
@@ -96,7 +96,12 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton4.setText("Salir");
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         jrInscriptas.setText("Materias inscriptas");
         jrInscriptas.addActionListener(new java.awt.event.ActionListener() {
@@ -140,7 +145,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbAnularInscripcion)
                 .addGap(58, 58, 58)
-                .addComponent(jButton4)
+                .addComponent(jbSalir)
                 .addGap(54, 54, 54))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,7 +190,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbInscribir)
                     .addComponent(jbAnularInscripcion)
-                    .addComponent(jButton4))
+                    .addComponent(jbSalir))
                 .addGap(28, 28, 28))
         );
 
@@ -237,10 +242,13 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jbAnularInscripcionActionPerformed
 
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
@@ -256,6 +264,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JButton jbAnularInscripcion;
     private javax.swing.JButton jbInscribir;
+    private javax.swing.JButton jbSalir;
     private javax.swing.JComboBox<Alumno> jcbAlumnos;
     private javax.swing.JRadioButton jrInscriptas;
     private javax.swing.JRadioButton jrNoInscriptas;
