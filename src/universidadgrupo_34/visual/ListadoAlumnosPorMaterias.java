@@ -2,30 +2,33 @@
 package universidadgrupo_34.visual;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
-//import universidadgrupo_34.accesoAData.AlumnoData;
-//import universidadgrupo_34.accesoAData.InscripcionData;
+import universidadgrupo_34.accesoAData.AlumnoData;
+import universidadgrupo_34.accesoAData.InscripcionData;
 import universidadgrupo_34.accesoAData.MateriaData;
-//import universidadgrupo_34.entidades.Alumno;
+import universidadgrupo_34.entidades.Alumno;
 import universidadgrupo_34.entidades.Materia;
 
 
 public class ListadoAlumnosPorMaterias extends javax.swing.JInternalFrame {
 
     private ArrayList<Materia> listaM;
-//    private ArrayList<Alumno> listaA;
-//    private InscripcionData inscData;
-    private MateriaData mData;
-//    private AlumnoData aData;
+    private ArrayList<Alumno> listaA;
     private DefaultTableModel modelo;
+    private InscripcionData inscData;
     
     public ListadoAlumnosPorMaterias() {
         initComponents();
         modelo = new DefaultTableModel();
         armarCabecera();
-        listaM = (ArrayList<Materia>) mData.listarMaterias();
+        MateriaData mdata=new MateriaData();
+        AlumnoData aData=new AlumnoData();
+        listaM = (ArrayList<Materia>) mdata.listarMaterias();
         cargarComboBox();
-//        listaA = (ArrayList<Alumno>) aData.listarAlumnos();
+        inscData = new InscripcionData();
+        listaA = (ArrayList<Alumno>) aData.listarAlumnos();
+        cargaDatosAlumnos();
 
         
         
@@ -213,5 +216,12 @@ private void armarCabecera() {
         }
         jtAlum.setModel(modelo);
 }
+private void cargaDatosAlumnos(){
+        Materia selec = (Materia) jcbMaterias.getSelectedItem();
+        List <Alumno>lista = (ArrayList) inscData.obtenerAlumnoPorMateria(selec.getIdMateria());
+        for(Alumno a: lista){
+            modelo.addRow(new Object[] {a.getIdAlumno(),a.getDni(),a.getApellido(),a.getNombre(),a.getfNacimiento(),a.isEstado()});
+        }
+    }
 
 }
