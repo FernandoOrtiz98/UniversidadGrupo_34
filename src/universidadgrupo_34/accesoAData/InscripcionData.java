@@ -14,7 +14,7 @@ import universidadgrupo_34.entidades.Materia;
 
 public class InscripcionData {
 
-    private Connection con;
+    private Connection con=null;
     private MateriaData matDat;
     private AlumnoData aluData;
 
@@ -22,26 +22,24 @@ public class InscripcionData {
         this.con = Conexion.getConexion();
     }
 
-    public void guardarInscripcion(Inscripcion inscripcion) {
-        String query = "INSERT INTO inscripcion(idAlumno,idMateria,nota=null) VALUES (?,?,?)";
+    public void guardarInscripcion(Inscripcion insc) {
+        String query = "INSERT INTO inscripcion(idAlumno,idMateria,nota) VALUES (?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, inscripcion.getAlumno().getIdAlumno());
-            ps.setInt(2, inscripcion.getMateria().getIdMateria());
-            ps.setInt(3, inscripcion.getNota());
-
+            ps.setInt(1, insc.getAlumno().getIdAlumno());
+            ps.setInt(2, insc.getMateria().getIdMateria());
+            ps.setInt(3, insc.getNota());
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                inscripcion.setIdInscripcion(rs.getInt(1));
-            } else {
-                JOptionPane.showMessageDialog(null, "No se pudo tener el ID...");
+                insc.setIdInscripcion(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "inscripcion registrada");
             }
             ps.close();
-            JOptionPane.showMessageDialog(null, "Guardado!");
+            
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error de conexion... " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la trabla de inscripcion " + ex.getMessage());
         }
     }
 
@@ -62,7 +60,7 @@ public class InscripcionData {
             ps.close();
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de inscripciones ");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de inscripciones "+ex.getMessage());
         }
     }
 
