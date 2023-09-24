@@ -169,7 +169,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         Escritorio.removeAll();
         Escritorio.repaint();
-        ListadoAlumnosPorMaterias lapm= new ListadoAlumnosPorMaterias();
+        ListadoAlumnosPorMaterias lapm = new ListadoAlumnosPorMaterias();
         Escritorio.add(lapm);
         Escritorio.moveToFront(lapm);
         lapm.setVisible(true);
