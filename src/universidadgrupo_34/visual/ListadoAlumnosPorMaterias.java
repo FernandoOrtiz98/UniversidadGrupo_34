@@ -5,17 +5,36 @@
  */
 package universidadgrupo_34.visual;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import universidadgrupo_34.accesoAData.AlumnoData;
+import universidadgrupo_34.accesoAData.InscripcionData;
+import universidadgrupo_34.accesoAData.MateriaData;
+import universidadgrupo_34.entidades.Alumno;
+import universidadgrupo_34.entidades.Materia;
+
 /**
  *
  * @author Fer
  */
 public class ListadoAlumnosPorMaterias extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Alumnos
-     */
+    private ArrayList<Materia> listaM;
+    private ArrayList<Alumno> listaA;
+    private InscripcionData inscData;
+    private MateriaData mData;
+    private AlumnoData aData;
+    private DefaultTableModel modelo;
+    
     public ListadoAlumnosPorMaterias() {
         initComponents();
+//        aData = new AlumnoData();
+//        listaA = (ArrayList<Alumno>) aData.listarAlumnos();
+        modelo = new DefaultTableModel();
+        armarCabecera();
+        cargarComboBox();
+//        inscData = new InscripcionData();
+//        mData = new MateriaData();
     }
 
     /**
@@ -45,9 +64,9 @@ public class ListadoAlumnosPorMaterias extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jbSalir = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcbMaterias = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtAlumnos = new javax.swing.JTable();
 
         jLabel6.setText("Fecha de Nacimiento:");
 
@@ -86,9 +105,7 @@ public class ListadoAlumnosPorMaterias extends javax.swing.JInternalFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -99,7 +116,7 @@ public class ListadoAlumnosPorMaterias extends javax.swing.JInternalFrame {
                 "ID", "DNI", "Apellido", "Nombre", "FechaNacimiento", "Estado"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtAlumnos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,7 +135,7 @@ public class ListadoAlumnosPorMaterias extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(43, 43, 43)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jcbMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(108, 108, 108)
                         .addComponent(jLabel1)))
@@ -131,7 +148,7 @@ public class ListadoAlumnosPorMaterias extends javax.swing.JInternalFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
@@ -152,7 +169,6 @@ public class ListadoAlumnosPorMaterias extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -164,10 +180,31 @@ public class ListadoAlumnosPorMaterias extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<Materia> jcbMaterias;
+    private javax.swing.JTable jtAlumnos;
     // End of variables declaration//GEN-END:variables
+private void cargarComboBox() {
+        for (Materia item : listaM) {
+            jcbMaterias.addItem(item);
+        }
+
+    }
+private void armarCabecera() {
+        ArrayList<Object> filaCabecera= new ArrayList<>();
+        filaCabecera.add("ID");
+        filaCabecera.add("Dni");
+        filaCabecera.add("Apellido");
+        filaCabecera.add("Nombre");
+        filaCabecera.add("Fecha Nacimiento");
+        filaCabecera.add("Estado");
+        for (Object it : filaCabecera) {
+            modelo.addColumn(it);
+        }
+        jtAlumnos.setModel(modelo);
+    }
+
 }
