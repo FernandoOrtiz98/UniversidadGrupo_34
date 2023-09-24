@@ -48,12 +48,9 @@ public class InscripcionData {
 
         try {
             PreparedStatement ps = con.prepareStatement(query);
-
-            ps.setInt(1, idAlumno);
-            ps.setInt(2, idMateria);
+            ps.setInt(2, idAlumno);
+            ps.setInt(1, idMateria);
             int filas=ps.executeUpdate();
-
-            ResultSet rs = ps.getGeneratedKeys();
             if (filas>0) {
                 JOptionPane.showMessageDialog(null, "inscripcion borrada");
             }
