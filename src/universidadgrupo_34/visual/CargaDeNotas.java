@@ -6,6 +6,7 @@
 package universidadgrupo_34.visual;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import universidadgrupo_34.accesoAData.AlumnoData;
 import universidadgrupo_34.accesoAData.InscripcionData;
@@ -23,7 +24,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
     private AlumnoData aData;
     private MateriaData mData;
     private InscripcionData inscData;
-    private DefaultTableModel modelo;
+    private DefaultTableModel modelo= new DefaultTableModel();
     private Alumno selec;
 
     public CargaDeNotas() {
@@ -33,12 +34,12 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
         initComponents();
 
         listaA = (ArrayList<Alumno>) aData.listarAlumnos();
-        modelo = new DefaultTableModel();
+   
 
         cargarComboBox();
 
         armarCabecera();
-        cargaDatosInscriptas();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -99,6 +100,17 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
 
         jButton4.setText("Salir");
 
+        jcbAlumnoNotas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbAlumnoNotasItemStateChanged(evt);
+            }
+        });
+        jcbAlumnoNotas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbAlumnoNotasActionPerformed(evt);
+            }
+        });
+
         jtNotas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -157,6 +169,14 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jcbAlumnoNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnoNotasActionPerformed
+        
+    }//GEN-LAST:event_jcbAlumnoNotasActionPerformed
+
+    private void jcbAlumnoNotasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbAlumnoNotasItemStateChanged
+        cargaDatosInscriptas();
+    }//GEN-LAST:event_jcbAlumnoNotasItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -200,23 +220,13 @@ private void cargarComboBox() {
 
     }
     private void cargaDatosInscriptas(){
-        /*
-         double nota = 0;
+        
         Alumno selec = (Alumno) jcbAlumnoNotas.getSelectedItem();
-        List <Materia>lista = (ArrayList) inscData.obtenerMateriasCursadas(selec.getIdAlumno());
-        for(Materia m: lista){
-            modelo.addRow(new Object[] {m.getIdMateria(), m.getNombre(), null});
-          
-        }    
-         */
-        selec = (Alumno) jcbAlumnoNotas.getSelectedItem();
-         
-        //List <Inscripcion>lista = (ArrayList) inscData.obtenerInscripcionesPorAlumno(selec.getIdAlumno());
-        //System.out.println(lista);
-         System.out.println(inscData.obtenerInscripcionesPorAlumno(selec.getIdAlumno()));
-        for(Inscripcion i: inscData.obtenerInscripcionesPorAlumno(selec.getIdAlumno())){
-            modelo.addRow(new Object[]{i.getIdInscripcion(), i.getMateria(), i.getNota()});
-            
+        List <Inscripcion>lista = (ArrayList) inscData.obtenerInscripcionesPorAlumno(selec.getIdAlumno());
+            //System.out.println("id alumo="+selec);
+        for(Inscripcion i: lista){
+            modelo.addRow(new Object[]{i.getIdInscripcion(), i.getMateria().getNombre(), i.getNota()});
+            //System.out.println(inscData.obtenerInscripcionesPorAlumno(selec.getIdAlumno()));
         }
         
     }
