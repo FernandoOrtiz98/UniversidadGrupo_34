@@ -102,7 +102,7 @@ public class InscripcionData {
     }
 
     public List<Inscripcion> obtenerInscripcionesPorAlumno(int idAlumno) {
-        List<Inscripcion> inscripciones = new ArrayList();
+        List<Inscripcion> inscripciones = new ArrayList<>();
         String sql = "SELECT * FROM inscripcion WHERE idAlumno = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -174,7 +174,7 @@ public class InscripcionData {
     }
        public List<Alumno> obtenerAlumnoPorMateria(int idMateria){
         ArrayList<Alumno> AlumList = new ArrayList();
-        String sql=" SELECT a.idAlumno,dni,apellido,nombre,fNacimiento,estado "
+        String sql="SELECT a.idAlumno,dni,apellido,nombre,fNacimiento,estado "
                 + " FROM inscripcion i,alumno a WHERE i.idAlumno = a.idAlumno AND idMateria = ? AND a.estado = 1";
         try {
             PreparedStatement ps= con.prepareStatement(sql);
