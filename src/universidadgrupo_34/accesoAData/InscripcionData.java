@@ -15,8 +15,8 @@ import universidadgrupo_34.entidades.Materia;
 public class InscripcionData {
 
     private Connection con=null;
-    private MateriaData matDat;
-    private AlumnoData aluData;
+    private MateriaData matDat= new MateriaData();
+    private AlumnoData aluData= new AlumnoData();
 
     public InscripcionData() {
         this.con = Conexion.getConexion();
@@ -108,6 +108,7 @@ public class InscripcionData {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idAlumno);
             ResultSet rs = ps.executeQuery();
+            //System.out.println(" dsadsa"+idAlumno);
             while (rs.next()) {
                 Inscripcion insc = new Inscripcion();
                 insc.setIdInscripcion(rs.getInt("idInscripcion"));
@@ -117,10 +118,14 @@ public class InscripcionData {
                 insc.setMateria(mat);
                 insc.setNota(rs.getInt("nota"));
                 inscripciones.add(insc);
+                //System.out.println("esto se va guardar en la lista inscripciones"+insc);
+                
             }
+            ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error de conexion..." + ex.getMessage());
         }
+        
         return inscripciones;
     }
 
