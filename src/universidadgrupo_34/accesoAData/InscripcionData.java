@@ -61,17 +61,20 @@ public class InscripcionData {
         }
     }
 
-    public void actualizarNota(Inscripcion inscripcion, int nota) {
-        String query = "UPDATE inscripcion SET nota=?,"
-                + "where idAlumno=?, AND idMateria=?";
+    public void actualizarNota(int idAlumno,int idMateria, int nota) {
+        String query = "UPDATE inscripcion SET nota = ? "
+                + " where idAlumno = ? AND idMateria = ?";
         try {
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, nota);
-            ps.setInt(2, inscripcion.getAlumno().getIdAlumno());
-            ps.setInt(3, inscripcion.getMateria().getIdMateria());
-            ps.executeUpdate();
+            ps.setInt(2, idAlumno);
+            ps.setInt(3, idMateria);
+            int filas=ps.executeUpdate();
+            if(filas>0){
+                JOptionPane.showMessageDialog(null, "Actualizado!");
+            }
             ps.close();
-            JOptionPane.showMessageDialog(null, "Actualizado!");
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error de conexion...");
         }
