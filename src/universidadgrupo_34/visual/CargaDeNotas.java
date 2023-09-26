@@ -32,14 +32,9 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
         inscData = new InscripcionData();
         Alumno selec = new Alumno();
         initComponents();
-
         listaA = (ArrayList<Alumno>) aData.listarAlumnos();
-   
-
         cargarComboBox();
-
-        armarCabecera();
-        
+        armarCabecera(); 
     }
 
     @SuppressWarnings("unchecked")
@@ -62,7 +57,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jbGuardar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jcbAlumnoNotas = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -96,7 +91,12 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Seleccione un alumno");
 
-        jButton2.setText("Guardar");
+        jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Salir");
 
@@ -130,7 +130,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(jbGuardar)
                 .addGap(60, 60, 60)
                 .addComponent(jButton4)
                 .addGap(54, 54, 54))
@@ -161,7 +161,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(jbGuardar)
                     .addComponent(jButton4))
                 .addGap(28, 28, 28))
         );
@@ -170,17 +170,22 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbAlumnoNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnoNotasActionPerformed
+        borrarFilas();
+        cargaDatosInscriptas();
         
     }//GEN-LAST:event_jcbAlumnoNotasActionPerformed
 
     private void jcbAlumnoNotasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbAlumnoNotasItemStateChanged
-        cargaDatosInscriptas();
+        
     }//GEN-LAST:event_jcbAlumnoNotasItemStateChanged
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        
+    }//GEN-LAST:event_jbGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -198,6 +203,7 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JButton jbGuardar;
     private javax.swing.JComboBox<Alumno> jcbAlumnoNotas;
     private javax.swing.JTable jtNotas;
     // End of variables declaration//GEN-END:variables
@@ -219,14 +225,17 @@ private void cargarComboBox() {
         jtNotas.setModel(modelo);
 
     }
+    private void borrarFilas() {
+        int f = modelo.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            modelo.removeRow(f);
+        }
+    }
     private void cargaDatosInscriptas(){
-        
         Alumno selec = (Alumno) jcbAlumnoNotas.getSelectedItem();
         List <Inscripcion>lista = (ArrayList) inscData.obtenerInscripcionesPorAlumno(selec.getIdAlumno());
-            //System.out.println("id alumo="+selec);
         for(Inscripcion i: lista){
             modelo.addRow(new Object[]{i.getIdInscripcion(), i.getMateria().getNombre(), i.getNota()});
-            //System.out.println(inscData.obtenerInscripcionesPorAlumno(selec.getIdAlumno()));
         }
         
     }
