@@ -1,4 +1,3 @@
-
 package universidadgrupo_34.visual;
 
 import java.util.ArrayList;
@@ -10,28 +9,21 @@ import universidadgrupo_34.accesoAData.MateriaData;
 import universidadgrupo_34.entidades.Alumno;
 import universidadgrupo_34.entidades.Materia;
 
-
 public class ListadoAlumnosPorMaterias extends javax.swing.JInternalFrame {
 
     private ArrayList<Materia> listaM;
     private ArrayList<Alumno> listaA;
-    private DefaultTableModel modelo;
-    private InscripcionData inscData;
-    
+    private DefaultTableModel modelo= new DefaultTableModel();
+    private InscripcionData inscData = new InscripcionData();
+    private MateriaData mdata = new MateriaData();
+    private AlumnoData aData = new AlumnoData();
     public ListadoAlumnosPorMaterias() {
         initComponents();
-        modelo = new DefaultTableModel();
         armarCabecera();
-        MateriaData mdata=new MateriaData();
-        AlumnoData aData=new AlumnoData();
         listaM = (ArrayList<Materia>) mdata.listarMaterias();
-        cargarComboBox();
-        inscData = new InscripcionData();
         listaA = (ArrayList<Alumno>) aData.listarAlumnos();
+        cargarComboBox();
         cargaDatosAlumnos();
-
-        
-        
 
     }
 
@@ -113,6 +105,12 @@ public class ListadoAlumnosPorMaterias extends javax.swing.JInternalFrame {
             }
         });
 
+        jcbMaterias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbMateriasActionPerformed(evt);
+            }
+        });
+
         jtAlum.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -171,6 +169,11 @@ public class ListadoAlumnosPorMaterias extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jcbMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbMateriasActionPerformed
+        borrarFilas();
+        cargaDatosAlumnos();
+    }//GEN-LAST:event_jcbMateriasActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -203,8 +206,9 @@ private void cargarComboBox() {
         }
 
     }
-private void armarCabecera() {
-        ArrayList<Object> filaCabecera= new ArrayList<>();
+
+    private void armarCabecera() {
+        ArrayList<Object> filaCabecera = new ArrayList<>();
         filaCabecera.add("ID");
         filaCabecera.add("Dni");
         filaCabecera.add("Apellido");
@@ -215,12 +219,19 @@ private void armarCabecera() {
             modelo.addColumn(it);
         }
         jtAlum.setModel(modelo);
-}
-private void cargaDatosAlumnos(){
+    }
+
+    private void cargaDatosAlumnos() {
         Materia selec = (Materia) jcbMaterias.getSelectedItem();
-        List <Alumno>lista = (ArrayList) inscData.obtenerAlumnoPorMateria(selec.getIdMateria());
-        for(Alumno a: lista){
-            modelo.addRow(new Object[] {a.getIdAlumno(),a.getDni(),a.getApellido(),a.getNombre(),a.getfNacimiento(),a.isEstado()});
+        List<Alumno> lista = (ArrayList) inscData.obtenerAlumnoPorMateria(selec.getIdMateria());
+        for (Alumno a : lista) {
+            modelo.addRow(new Object[]{a.getIdAlumno(), a.getDni(), a.getApellido(), a.getNombre(), a.getfNacimiento(), a.isEstado()});
+        }
+    }
+    private void borrarFilas() {
+        int f = modelo.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            modelo.removeRow(f);
         }
     }
 
