@@ -15,8 +15,8 @@ import universidadgrupo_34.entidades.Alumno;
  * @author grupo_34
  */
 public class Alumnos extends javax.swing.JInternalFrame {
-    AlumnoData alum= new AlumnoData();
-    Alumno alu=new Alumno();
+    private AlumnoData alum= new AlumnoData();
+    private Alumno alu=new Alumno();
     
     /**
      * Creates new form Alumnos
@@ -201,10 +201,8 @@ public class Alumnos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-//        AlumnoData alum= new AlumnoData();
-//        Alumno alu=new Alumno();
+
         try {
-            
             alu=alum.buscarAlumnoDni(Integer.parseInt(jtDocumento.getText()));
             jtApellido.setText(alu.getApellido());
             jtNombre.setText(alu.getNombre());
@@ -212,6 +210,8 @@ public class Alumnos extends javax.swing.JInternalFrame {
             jdCalendario.setDate(Date.valueOf(alu.getfNacimiento()));
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Dni incorrecto");
+        } catch (NullPointerException nu){
+            JOptionPane.showMessageDialog(this, "No se encontro el alumno");
         }
         
         
