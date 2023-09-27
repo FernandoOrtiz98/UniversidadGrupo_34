@@ -1,7 +1,6 @@
 package universidadgrupo_34.visual;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import universidadgrupo_34.accesoAData.AlumnoData;
@@ -30,7 +29,6 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
         cargarComboBox();
         inscData = new InscripcionData();
         mData = new MateriaData();
-//        System.out.println("verificar:" + jcbAlumnos.getItemAt(WIDTH).getIdAlumno());
     }
 
     @SuppressWarnings("unchecked")
