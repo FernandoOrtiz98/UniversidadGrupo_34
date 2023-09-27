@@ -51,13 +51,14 @@ public class MateriaData {
         }
     }
     public void modificarMateria(Materia mat){
-        String query="UPDATE materia SET nombre=?,anio=? ,estado=?"
-                + "where idMateria=?";
+        String query=" UPDATE materia SET nombre=?,anio=? ,estado=? "
+                + " where idMateria=? ";
         try {
             PreparedStatement ps= con.prepareStatement(query);
                ps.setString(1, mat.getNombre());
                 ps.setInt(2, mat.getAnio());
                 ps.setBoolean(3,mat.isEstado());
+                ps.setInt(4, mat.getIdMateria());
                 ps.executeUpdate();
                 int exito=ps.executeUpdate();
                 if(exito==1){
