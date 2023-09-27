@@ -103,6 +103,12 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
             }
         });
 
+        jcbAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbAlumnosActionPerformed(evt);
+            }
+        });
+
         jrInscriptas.setText("Materias inscriptas");
         jrInscriptas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,7 +242,6 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
         if(filaSeleccionada!=-1){
             Alumno a=(Alumno)jcbAlumnos.getSelectedItem();
             int idMateria=(Integer)modelo.getValueAt(filaSeleccionada, 0);
-           // System.out.println("select "+a.getIdAlumno()+" "+idMateria);
             inscData.borrarInscripcionAlumnoMateria(a.getIdAlumno(),idMateria);
             borrarFilas();
         }
@@ -245,6 +250,12 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jcbAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbAlumnosActionPerformed
+        jrNoInscriptas.setSelected(false);
+        jrInscriptas.setSelected(false);
+        borrarFilas();
+    }//GEN-LAST:event_jcbAlumnosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
