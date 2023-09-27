@@ -5,6 +5,7 @@
  */
 package universidadgrupo_34.visual;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import universidadgrupo_34.accesoAData.AlumnoData;
@@ -17,6 +18,7 @@ import universidadgrupo_34.entidades.Alumno;
 public class Alumnos extends javax.swing.JInternalFrame {
     private AlumnoData alum= new AlumnoData();
     private Alumno alu=new Alumno();
+    
     
     /**
      * Creates new form Alumnos
@@ -227,13 +229,41 @@ public class Alumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrEstadoStateChanged
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        try {
+           Integer dni = Integer.parseInt(jtDocumento.getText());
+           String nombre = jtNombre.getText();
+           String apellido = jtApellido.getText();
+           
+           LocalDate afecha= jdCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+           if(nombre.isEmpty()|| apellido.isEmpty()|| afecha==null){
+              JOptionPane.showMessageDialog(this, "No puedo haber campos vacios");
+                       return;
+           }
+           if(alu!=null){
+               alu.setDni(Integer.parseInt(jtDocumento.getText()));
+               alu.setApellido(jtApellido.getText());
+               alu.setNombre(jtNombre.getText());
+               alu.setEstado(jrEstado.isSelected());
+               alu.setfNacimiento(jdCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+               alum.modificarAlumno(alu);
+           }else{
+               alu= new Alumno(dni,apellido, nombre, afecha, true);
+               alum.guardarAlumno(alu);
+           }
+           
+
+//        alu.setDni(Integer.parseInt(jtDocumento.getText()));
+//        alu.setApellido(jtApellido.getText());
+//        alu.setNombre(jtNombre.getText());
+//        alu.setEstado(jrEstado.isSelected());
+//        alu.setfNacimiento(jdCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+//        alum.guardarAlumno(alu);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,"Datos incompatible" );
+        } catch (NullPointerException ex){
+            JOptionPane.showMessageDialog(this,"Completar datos" );
+        }
         
-        alu.setDni(Integer.parseInt(jtDocumento.getText()));
-        alu.setApellido(jtApellido.getText());
-        alu.setNombre(jtNombre.getText());
-        alu.setEstado(jrEstado.isSelected());
-        alu.setfNacimiento(jdCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        alum.guardarAlumno(alu);
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
