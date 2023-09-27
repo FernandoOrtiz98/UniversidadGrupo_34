@@ -1,6 +1,4 @@
-/*
 
- */
 package universidadgrupo_34.visual;
 
 import javax.swing.JOptionPane;
@@ -11,13 +9,11 @@ import universidadgrupo_34.entidades.Materia;
 public class Materias extends javax.swing.JInternalFrame {
     private Materia mate= new Materia();
     private MateriaData matData= new MateriaData();
-    
-   
+
     public Materias() {
         initComponents();
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -184,14 +180,7 @@ public class Materias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jtGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtGuardarActionPerformed
-//        try {
-//        mate.setNombre(jtNombre.getText());
-//        mate.setAnio(Integer.parseInt(jtAnio.getText()));
-//        mate.setEstado(jrEstado.isSelected());
-//        matData.guardarMateria(mate);
-//        } catch (NumberFormatException e) {
-//            JOptionPane.showMessageDialog(this, "Datos incorrectos");
-//        }
+
         try {
            Integer anio = Integer.parseInt(jtAnio.getText());
            String nombre = jtNombre.getText();
