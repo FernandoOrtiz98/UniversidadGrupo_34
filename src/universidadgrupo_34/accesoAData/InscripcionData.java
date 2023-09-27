@@ -195,6 +195,7 @@ public class InscripcionData {
                 alumno.setApellido(rs.getString("apellido"));
                 alumno.setNombre(rs.getString("nombre"));
                 alumno.setfNacimiento(rs.getDate("fNacimiento").toLocalDate());
+                alumno.setEstado(rs.getBoolean("estado"));
                 AlumList.add(alumno);
             }
             ps.close();
