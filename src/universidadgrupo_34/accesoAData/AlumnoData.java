@@ -20,7 +20,6 @@ import universidadgrupo_34.entidades.Alumno;
  */
 public class AlumnoData {
     private Connection con=null;
-
     public AlumnoData() {
         this.con = Conexion.getConexion();
     }
@@ -49,15 +48,15 @@ public class AlumnoData {
         }
     }
     public void modificarAlumno(Alumno alum){
-        String query="UPDATE alumno SET dni=?, apellido=?, nombre=?, fNacimiento=?,"
-                + "where idAlumno=?";
+        String query="UPDATE alumno SET dni=?, apellido=?, nombre=?, fNacimiento=?"
+                + " where idAlumno=?";
         try {
             PreparedStatement ps= con.prepareStatement(query);
             ps.setInt(1, alum.getDni());
                 ps.setString(2, alum.getApellido());
                 ps.setString(3, alum.getNombre());
                 ps.setDate(4, Date.valueOf(alum.getfNacimiento()));
-                ps.setBoolean(5, alum.isEstado());
+                ps.setInt(5, alum.getIdAlumno());
                 int exito=ps.executeUpdate();
                 if(exito==1){
                     JOptionPane.showMessageDialog(null, "Alumno Modificado");
