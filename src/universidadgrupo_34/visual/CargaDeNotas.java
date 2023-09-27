@@ -13,6 +13,7 @@ import universidadgrupo_34.accesoAData.InscripcionData;
 import universidadgrupo_34.accesoAData.MateriaData;
 import universidadgrupo_34.entidades.Alumno;
 import universidadgrupo_34.entidades.Inscripcion;
+import universidadgrupo_34.entidades.Materia;
 
 /**
  *
@@ -24,13 +25,25 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
     private AlumnoData aData;
     private MateriaData mData;
     private InscripcionData inscData;
-    private DefaultTableModel modelo= new DefaultTableModel();
+    private Materia m;
+    private DefaultTableModel modelo= new DefaultTableModel(){
+    public boolean isCellEditable(int fila,int columna){
+        if(columna==2){
+            System.out.println("hla");
+            return true;
+            
+        }else{
+        return false;}
+    }
+    };
     private Alumno selec;
 
     public CargaDeNotas() {
         aData = new AlumnoData();
         inscData = new InscripcionData();
         Alumno selec = new Alumno();
+        m = new Materia();
+        
         initComponents();
         listaA = (ArrayList<Alumno>) aData.listarAlumnos();
         cargarComboBox();
@@ -99,6 +112,11 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
         });
 
         jButton4.setText("Salir");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jcbAlumnoNotas.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -122,6 +140,11 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jtNotas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtNotasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtNotas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -180,8 +203,35 @@ public class CargaDeNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcbAlumnoNotasItemStateChanged
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        
+       // Alumno selec = (Alumno) jcbAlumnoNotas.getSelectedItem();
+//        List <Inscripcion>lista = (ArrayList) inscData.obtenerInscripcionesPorAlumno(selec.getIdAlumno());
+//        for(Inscripcion i: lista){ 
+//            int nota= (Integer) jtNotas.getValueAt(jtNotas.getSelectedRow(),2);
+//            System.out.println("n"+nota);
+//         inscData.actualizarNota(i.getAlumno().getIdAlumno(),i.getMateria().getIdMateria(),nota);
+//        }
+//           // inscData.actualizarNota(i.getAlumno().getIdAlumno(),i.getMateria().getIdMateria(),nota);
+//            
+//         }
+//        System.out.println(jtNotas.getRowCount());
+//        System.out.println(jtNotas.getValueAt(0, 2));
+//        System.out.println(jtNotas.getValueAt(0, 2));
+//        System.out.println(jtNotas.getValueAt(1, 2));
+          for (int i = 0; i < jtNotas.getRowCount(); i++) {
+           m = (Materia)jtNotas.getValueAt(i,3);
+             inscData.actualizarNota(selec.getIdAlumno(),m.getIdMateria(),Integer.parseInt(""+jtNotas.getValueAt(i, 2)));
+   
+        }
+           
     }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jtNotasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtNotasMouseClicked
+        
+    }//GEN-LAST:event_jtNotasMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -219,10 +269,15 @@ private void cargarComboBox() {
         filaCabecera.add("Codigo");
         filaCabecera.add("Materia");
         filaCabecera.add("Nota");
+        filaCabecera.add("Mat");
         for (Object it : filaCabecera) {
             modelo.addColumn(it);
         }
         jtNotas.setModel(modelo);
+        jtNotas.getColumnModel().getColumn(3).setPreferredWidth(0);
+        jtNotas.getColumnModel().getColumn(3).setMinWidth(0);
+        jtNotas.getColumnModel().getColumn(3).setMaxWidth(0);
+        
 
     }
     private void borrarFilas() {
@@ -232,10 +287,10 @@ private void cargarComboBox() {
         }
     }
     private void cargaDatosInscriptas(){
-        Alumno selec = (Alumno) jcbAlumnoNotas.getSelectedItem();
+        selec = (Alumno) jcbAlumnoNotas.getSelectedItem();
         List <Inscripcion>lista = (ArrayList) inscData.obtenerInscripcionesPorAlumno(selec.getIdAlumno());
         for(Inscripcion i: lista){
-            modelo.addRow(new Object[]{i.getIdInscripcion(), i.getMateria().getNombre(), i.getNota()});
+            modelo.addRow(new Object[]{i.getIdInscripcion(), i.getMateria().getNombre(), i.getNota(),i.getMateria()});
         }
         
     }
