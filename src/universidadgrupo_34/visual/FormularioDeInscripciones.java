@@ -71,6 +71,8 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
 
+        jLabel1.setFont(new java.awt.Font("Dubai Light", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 204));
         jLabel1.setText("Formulario de Inscripcion");
 
         jLabel2.setText("Seleccione un alumno");
@@ -154,9 +156,6 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(182, 182, 182)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(145, 145, 145)
                         .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
@@ -171,7 +170,10 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
                         .addGap(79, 79, 79)
                         .addComponent(jrInscriptas)
                         .addGap(52, 52, 52)
-                        .addComponent(jrNoInscriptas)))
+                        .addComponent(jrNoInscriptas))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(137, 137, 137)
+                        .addComponent(jLabel1)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -190,7 +192,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
                     .addComponent(jrNoInscriptas))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbInscribir)
                     .addComponent(jbAnularInscripcion)
