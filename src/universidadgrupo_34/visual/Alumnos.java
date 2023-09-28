@@ -9,7 +9,7 @@ import universidadgrupo_34.entidades.Alumno;
 
 public class Alumnos extends javax.swing.JInternalFrame {
     private AlumnoData alum= new AlumnoData();
-    private Alumno alu=new Alumno();
+    private Alumno alu=null;
     
     public Alumnos() {
         initComponents();
@@ -40,6 +40,8 @@ public class Alumnos extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
 
+        jLabel1.setFont(new java.awt.Font("Dubai Light", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 204));
         jLabel1.setText("Alumno");
 
         jLabel2.setText("Documento:");
@@ -173,7 +175,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jdCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbNuevo)
                     .addComponent(jbEliminar)
@@ -220,16 +222,19 @@ public class Alumnos extends javax.swing.JInternalFrame {
               JOptionPane.showMessageDialog(this, "No puedo haber campos vacios");
                        return;
            }
-           if(alu!=null){
-               alu.setDni(Integer.parseInt(jtDocumento.getText()));
+           if(alu==null){
+               alu= new Alumno(dni,apellido, nombre, afecha, true);
+               alum.guardarAlumno(alu);
+               limpiarCampos();
+           }else{
+               
+                alu.setDni(Integer.parseInt(jtDocumento.getText()));
                alu.setApellido(jtApellido.getText());
                alu.setNombre(jtNombre.getText());
                alu.setEstado(jrEstado.isSelected());
                alu.setfNacimiento(jdCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                alum.modificarAlumno(alu);
-           }else{
-               alu= new Alumno(dni,apellido, nombre, afecha, true);
-               alum.guardarAlumno(alu);
+               limpiarCampos();
            }
            
         } catch (NumberFormatException e) {
@@ -237,16 +242,10 @@ public class Alumnos extends javax.swing.JInternalFrame {
         } catch (NullPointerException ex){
             JOptionPane.showMessageDialog(this,"Completar datos" );
         }
-        
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        jtDocumento.setText("");
-        jtApellido.setText("");
-        jtNombre.setText("");
-        jrEstado.setSelected(false);
-        jdCalendario.setDate(null);
-        alu=null;
+        limpiarCampos();
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -260,6 +259,7 @@ public class Alumnos extends javax.swing.JInternalFrame {
             }else if(Integer.parseInt(jtDocumento.getText())== alu.getDni()){          
                 alum.eliminarAlumno(alu.getIdAlumno());
                 JOptionPane.showMessageDialog(this, "Eliminacion exitosa!");
+                limpiarCampos();
             }else{
                 JOptionPane.showMessageDialog(this, "Dni no registrado!...");
                     } 
@@ -267,7 +267,6 @@ public class Alumnos extends javax.swing.JInternalFrame {
         }catch (Exception e) {
             JOptionPane.showMessageDialog(this,"No se pudo Eliminar el alumno");
         }
-        
         
     }//GEN-LAST:event_jbEliminarActionPerformed
 
@@ -290,4 +289,13 @@ public class Alumnos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtDocumento;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
+
+    public void limpiarCampos(){
+        jtDocumento.setText("");
+        jtApellido.setText("");
+        jtNombre.setText("");
+        jrEstado.setSelected(false);
+        jdCalendario.setDate(null);
+        alu=null;
+    }
 }
